@@ -12,6 +12,6 @@ M2 = [ A2' B2' C2' D2' ];
 content = getContent(1);
 mask = findHandMask(frame);
 
-result = replaceContent(M2, frame, content, mask, ones(size(mask))) ;
+result = replaceContent(M2, frame, content, mask, ones(size(mask)));
 
 figure, imshow(result);

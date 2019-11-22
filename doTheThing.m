@@ -1,9 +1,9 @@
 clc, clear, close all;
 
 
-resultFileName = 'sortie/test3';
-doReplaceContent = 0;
-doIntegrateShape = 1;
+resultFileName = 'sortie/test5';
+doReplaceContent = 1;
+doIntegrateShape = 0;
 
 load('tracking/result6.mat');
 points = C;
@@ -36,7 +36,7 @@ for k = 1:nbFrame
         content = getContent(k);
         mask = findHandMask(frame);
 
-        frame = replaceContent(M, frame, content, mask, ones(size(mask)));
+        frame = replaceContent(corners4, frame, content, mask, ones(size(mask)));
     end
     
     if doIntegrateShape

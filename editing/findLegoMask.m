@@ -11,7 +11,7 @@ function mask = findLegoMask(corners6, width, height, legoQuads)
     cornerPoints = [ A' B' C' D' E' F' ];
     P = deterP(cornerPoints, corners6);
     
-    mask = zeros(width, height);
+    mask = zeros(width, height, 3);
     
     for n = 1:size(legoQuads)
         points = legoQuads{n};

@@ -22,43 +22,64 @@ function img = replaceContent(corners4, destFrame, srcContent, handNonReplacemen
     D1 = [ h 1 ];
     M = [ A1' B1' C1' D1' ];
     H = deterH(M, corners4);
-    H_1 = inv(H);
+    %H_1 = inv(H);
     
-    % une grande partie de l'image retrounée reste inchangée
-    img = destFrame;
+    %img = destFrame;
+    %[ w_, h_, ~ ] = size(destFrame);
     
-    % on détermine la zone dans laquelle on devra remplacer des pixels
     minX = floor(min(corners4(1,:)));
     maxX = ceil(max(corners4(1,:)));
     minY = floor(min(corners4(2,:)));
     maxY = ceil(max(corners4(2,:)));
-    for j_ = minY:maxY
-        for i_ = minX:maxX
-            if additionalMask(i_, j_)
-                % calcule les coordonées corespondantes dans la source
-                IJs = H_1 * [ i_ j_ 1 ]';
-
-                s = IJs(3);
-                i = IJs(1) / s;
-                j = IJs(2) / s;
-
-                isInContent = (1 <= i && i <= w) && (1 <= j && j <= h);
-
-                % si les coordonées calculées sont dans la zone authorisée
-                if isInContent
-                    isOnHand = handNonReplacementMask(i_, j_);
-                    isInRect = (w * 1/4 < i && i <= w * 2/3) && (h * 3/4 < j && j <= h * 1);
-
-                    % si on est hors du rectange de la main ou que le
-                    % masque vaut FAUX
-                    if ~isInRect || ~isOnHand
-                        img(i_, j_, :) = srcContent(round(i), round(j), :);
-                    end
-                end % isInContent
-            end % additionalMask
-        end % for
-        %fprintf('%f%%\n', (j_-minY) / (maxY-minY) * 100);
-    end % for
+    
+    [ X, Y ] = meshgrid(minX:maxX, minY:maxY);
+    X = X(:);
+    Y = Y(:);
+    
+    IJs = H \ [ X Y ones((maxX-minX+1)*(maxY-minY+1), 1) ]';
+    X = X';
+    Y = Y';
+    
+    s = IJs(3, :);
+    I = round(IJs(1, :) ./ s);
+    J = round(IJs(2, :) ./ s);
+    
+    isInContent = (1 <= I & I <= w) & (1 <= J & J <= w);
+    ok = isInContent;
+    
+    I = I(ok);
+    J = J(ok);
+    X = X(ok);
+    Y = Y(ok);
+    
+    idx = linearIndices(size(srcContent), I, J); % dans source
+    idx_ = linearIndices(size(destFrame), X, Y); % dans destination
+    
+    isOnHand = ismember(idx_, find(handNonReplacementMask)); % indicesNop
+    isInRect = (w * 1/8 < I & I <= w * 2/3) & (h * 3/4 < J & J <= h * 1);
+    
+    okk = ~isInRect | ~isOnHand;
+    
+    idx = idx(okk);
+    idx_ = idx_(okk);
+    
+%     indicesYup = find(additionalMask);
+%     okkk = ismember(idx_, indicesYup);
+%     
+%     idx = idx(okkk);
+%     idx_ = idx_(okkk);
+    
+    R_ = destFrame(:, :, 1);
+    G_ = destFrame(:, :, 2);
+    B_ = destFrame(:, :, 3);
+    R = srcContent(:, :);
+    G = srcContent(:, :);
+    B = srcContent(:, :);
+    
+    R_(idx_) = R(idx);
+    G_(idx_) = G(idx);
+    B_(idx_) = B(idx);
+    img = cat(3, R_, G_, B_);
 
 end
 
