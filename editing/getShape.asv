@@ -1,0 +1,43 @@
+function polylines = getShape(frameN)
+%GETSHAPE Retourne la structure 3D à intégrer en frame N
+%   La structure retournée est un ensemble de suite de points
+
+    w = 7;
+    h = 2;
+    r = 3;
+
+    polylines = {
+        [ % sol
+            [ 0 0 0 ]
+            [ w 0 0 ]
+            [ w w 0 ]
+            [ 0 w 0 ]
+            [ 0 0 0 ]
+        ]'
+        [ % etage
+            [ 0 0 h ]
+            [ w 0 h ]
+            [ w w h ]
+            [ 0 w h ]
+            [ 0 0 h ]
+        ]'
+        [ % plafond
+            [ 0 0 h*2 ]
+            [ w 0 h*2 ]
+            [ w w h*2 ]
+            [ 0 w h*2 ]
+            [ 0 0 h*2 ]
+        ]'
+        % verticales
+        [ [ 0 0 0 ] ; [ 0 0 h*2 ] ]'
+        [ [ w 0 0 ] ; [ w 0 h*2 ] ]'
+        [ [ w w 0 ] ; [ w w h*2 ] ]'
+        [ [ 0 w 0 ] ; [ 0 w h*2 ] ]'
+        % toit
+        [ % avant
+            [ 0 0 h*2 ]
+            [ 0 0 h*2 ]
+    };
+
+end
+

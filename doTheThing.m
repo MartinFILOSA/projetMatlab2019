@@ -1,13 +1,14 @@
 clc, clear, close all;
 
 
+resultFileName = 'sortie/test3';
 doReplaceContent = 0;
 doIntegrateShape = 1;
 
 load('tracking/result6.mat');
 points = C;
 
-v = VideoWriter('sortie/test3');
+v = VideoWriter(resultFileName);
 v2 = VideoReader('video.mp4');
 
 userpath(strcat(pwd, '\editing'));
@@ -32,20 +33,21 @@ for k = 1:nbFrame
     frame = read(v2, k);
     
     if doReplaceContent
-        content = getContent(1);
+        content = getContent(k);
         mask = findHandMask(frame);
 
         frame = replaceContent(M, frame, content, mask, ones(size(mask)));
     end
     
     if doIntegrateShape
-        shape = getShape(1);
+        shape = getShape(k);
 
         frame = integrateShape(corners6, frame, shape);
     end
     
     writeVideo(v, frame);
-    fprintf('%f%%\n', k / nbFrame * 100);
+    fprintf('Frame %d sur %d (%f%%)\n', k, nbFrame, k/nbFrame*100);
 end
 
 close(v);
+%open(strcat(resultFileName, '.avi'));
