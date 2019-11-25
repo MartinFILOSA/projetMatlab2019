@@ -10,7 +10,7 @@ function img = integrateShape(corners6, frame, polylines)
     C = [ 29.7   21     0 ];
     D = [ 0      21     0 ];
     E = [ 29.7/8        21/2   0.96*2 ];%[ 29.7/2 21/2   0.96*3 ];
-    F = [ 29.7/8+.714*9 21/2   0.96*2 ];%[ 29.7/8 21*7/8 0.96*2 ];
+    F = [ 29.7/2+1.6 21/4+1.6   0.96*3 ];%[ 29.7/8 21*7/8 0.96*2 ];
     cornerPoints = [ A' B' C' D' E' F' ];
     P = deterP(cornerPoints, corners6);
 

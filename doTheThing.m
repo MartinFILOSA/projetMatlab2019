@@ -1,7 +1,7 @@
 clc, clear, close all;
 
 
-resultFileName = 'sortie/test3';
+resultFileName = 'sortie/test6';
 doReplaceContent = 0;
 doIntegrateShape = 1;
 
@@ -22,8 +22,8 @@ for k = 1:nbFrame
     
     A = [ Xs(1) Ys(1) ];
     B = [ Xs(2) Ys(2) ];
-    C = [ Xs(3) Ys(3) ];
-    D = [ Xs(4) Ys(4) ];
+    D = [ Xs(3) Ys(3) ];
+    C = [ Xs(4) Ys(4) ];
     E = [ Xs(5) Ys(5) ];
     F = [ Xs(6) Ys(6) ];
     
