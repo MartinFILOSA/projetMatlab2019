@@ -1,6 +1,6 @@
 function [x,y]=coordPointsMax(A,x,y,n)
 
-for i=1:6    
+for i=1:6 %2 pour la 3D, 4 pour le tracking
     max = A(y(i), x(i));
     xmax = x(i);
     ymax = y(i);

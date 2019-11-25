@@ -44,9 +44,6 @@ for i=1:n
     clear plot;
 end
 
-
+<<<<<<< HEAD
 close(V);
 save('result.mat',C);
-
-save result6 C %save result C pour uniquement le tracking 
-
