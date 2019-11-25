@@ -13,7 +13,7 @@ function [ F ] = relierPoints( x2, y2, i )
      
      plot(y3,x3,'r','LineWidth',2);
      hold off;
-     F(i) = getframe(gcf); % pour la vidéo
+     F = getframe(gcf); % pour la vidéo
      drawnow
 
 end

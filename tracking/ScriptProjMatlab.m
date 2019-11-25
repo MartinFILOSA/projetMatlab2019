@@ -4,6 +4,9 @@ close all;
 v2=VideoReader('vid_in2.mp4');
 n = v2.NumberOfFrames;
 
+V = VideoWriter('video.avi');
+open(V);
+
 for i=1:n 
     
     image = read(v2, i);
@@ -32,13 +35,14 @@ for i=1:n
     
     F = relierPoints(y1, x1, i);
     imshow(image);
+    
+    writeVideo(V, F);
+    
     C(2*i-1,:)=x2;
     C(2*i,:)=y2;  
     
     clear plot;
 end
 
-V=VideoWriter('result.avi');
-open('result.avi');
-writeVideo('result.avi',F);
+close(V);
 save('result.mat',C);
