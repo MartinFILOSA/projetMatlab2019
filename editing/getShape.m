@@ -11,8 +11,8 @@ function polylines = getShape(frameN)
     sz = 3;
     theta = .02;
     %Waterre1
-    x1 = (1:200) * 29.7 /2000 + frameN * (29.7/(326 + 10));
-    y1 = 21/2 .* ones(1,200) + 0.7 .* cos(pi * frameN / 5 * ones(1,200) + pi / 70 * (1:200));
+    x1 = 29.7/2 .* ones(1,200) + 0.7 .* cos(pi * frameN / 5 * ones(1,200) + pi / 70 * (1:200)) - 2;
+    y1 = (1:200) * 21 /2000 + frameN * (21/(326 + 10));
     z1 = 0 * ones(1,200);
     waterre1 = [ x1 ; y1 ; z1 ];
     
