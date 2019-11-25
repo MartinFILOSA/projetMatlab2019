@@ -4,7 +4,7 @@ close all;
 v2=VideoReader('vid_in2.mp4');
 n = v2.NumberOfFrames;
 
-V = VideoWriter('video.avi');
+V = VideoWriter('videoTracking.avi');
 open(V);
 
 for i=1:n 
@@ -18,7 +18,7 @@ for i=1:n
     
     if i==1
         imshow(image);
-        [x,y] = ginput(6);
+        [x,y] = ginput(6); %4 pour le tracking et 2 pour la 3D
         x1=round(x);
         y1=round(y);
         x2=x1;
@@ -33,7 +33,7 @@ for i=1:n
     [x2, y2] = coordPointsMax(Coins, xPredit, yPredit, 18);
     
     
-    F = relierPoints(y1, x1, i);
+    F = relierPoints(y1, x1);
     imshow(image);
     
     writeVideo(V, F);
@@ -44,6 +44,8 @@ for i=1:n
     clear plot;
 end
 
-<<<<<<< HEAD
+
 close(V);
 save('result.mat',C);
+
+save result6 C %save result C pour uniquement le tracking 

@@ -1,4 +1,4 @@
-function [ F ] = relierPoints( x2, y2 )
+function [ F ] = relierPoints( x2, y2, i )
    
     hold on, plot(y2,x2,'r+', 'MarkerSize', 20);  
 
