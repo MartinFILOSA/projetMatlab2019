@@ -1,6 +1,6 @@
 function [x,y]=coordPointsMax(A,x,y,n)
 
-for i=1:4    
+for i=1:6    
     max = A(y(i), x(i));
     xmax = x(i);
     ymax = y(i);

@@ -18,7 +18,7 @@ for i=1:n
     
     if i==1
         imshow(image);
-        [x,y] = ginput(4);
+        [x,y] = ginput(6);
         x1=round(x);
         y1=round(y);
         x2=x1;
@@ -44,5 +44,12 @@ for i=1:n
     clear plot;
 end
 
+<<<<<<< HEAD
 close(V);
 save('result.mat',C);
+=======
+%V=VideoWriter('result.avi');
+%open('result.avi');
+%writeVideo('result.avi',F);
+save result6 C
+>>>>>>> 45f9fc3c494b50cf5e320bc5672e12b0cb4e16c8

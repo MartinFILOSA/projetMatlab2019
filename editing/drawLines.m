@@ -28,9 +28,9 @@ function img = drawLines(frame, Xs, Ys, r, g, b, a)
         px = ax + ux * beta;
         py = ay + uy * beta;
 
-        i1 = sub2ind(size(B), round(px), round(py));
-        i2 = sub2ind(size(B), round(px-uy), round(py+ux));
-        i3 = sub2ind(size(B), round(px+uy), round(py-ux));
+        i1 = linearIndices(size(B), round(px), round(py));
+        i2 = linearIndices(size(B), round(px-uy), round(py+ux));
+        i3 = linearIndices(size(B), round(px+uy), round(py-ux));
 
         I = cat(2, i1, i2, i3);
 
